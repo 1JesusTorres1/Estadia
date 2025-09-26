@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class DoctorController extends Controller
 {
@@ -17,9 +18,10 @@ class DoctorController extends Controller
     /**
      * Lista de pacientes del doctor.
      */
-    public function pacientes()
+    public function mostrarPacientes()
     {
-        return view('doctor.pacientes');
+        $users = User::where('rol', 'paciente')->with('paciente')->paginate(10);
+        return view('doctor.pacientes', compact('users'));
     }
 
     /**

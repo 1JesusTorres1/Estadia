@@ -39,22 +39,19 @@ Route::middleware('auth')->group(function () {
 });
 
 // Rutas para el controlador del Doctor
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/doctor/dashboard', [DoctorController::class, 'index'])->name('doctor.dashboard');
-    Route::get('/doctor/pacientes', [DoctorController::class, 'pacientes'])->name('doctor.pacientes');
-    Route::get('/doctor/citas', [DoctorController::class, 'citas'])->name('doctor.citas');
-    Route::get('/doctor/historial', [DoctorController::class, 'historial'])->name('doctor.historial');
-    Route::get('/doctor/estudios', [DoctorController::class, 'estudios'])->name('doctor.estudios');
-    Route::get('/doctor/mensajes', [DoctorController::class, 'mensajes'])->name('doctor.mensajes');
+Route::middleware(['auth', 'verified'])->prefix('doctor')->name('doctor.')->group(function () {
+    Route::get('/dashboard', [DoctorController::class, 'index'])->name('dashboard');
+    Route::get('/pacientes', [DoctorController::class, 'mostrarPacientes'])->name('pacientes');
+    Route::get('/citas', [DoctorController::class, 'citas'])->name('citas');
+    Route::get('/historial', [DoctorController::class, 'historial'])->name('historial');
+    Route::get('/estudios', [DoctorController::class, 'estudios'])->name('estudios');
+    Route::get('/mensajes', [DoctorController::class, 'mensajes'])->name('mensajes');
 });
 
 // Rutas para el controlador del Administrador
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-    Route::get('/reportes', [AdminController::class, 'reportes'])->name('reportes');
-    
-    // ESTA LÍNEA SE ELIMINA PORQUE Route::resource YA LA MANEJA
-    // Route::get('/medicamentos', [AdminController::class, 'medicamentos'])->name('medicamentos'); 
+    Route::get('/reportes', [AdminController::class, 'reportes'])->name('reportes'); 
     
     Route::get('/backup', [AdminController::class, 'backup'])->name('backup');
     
@@ -65,7 +62,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         'usuarios' => 'user'
     ]);
 
-    // Rutas para el CRUD de Medicamentos (VERSIÓN CORREGIDA Y COMPLETA)
+    // Rutas para el CRUD de Medicamentos 
     Route::resource('medicamentos', MedicamentoController::class)->parameters([
         'medicamentos' => 'medicamento'
     ]);
