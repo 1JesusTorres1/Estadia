@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Paciente;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -48,12 +49,15 @@ class RegisteredUserController extends Controller
         ]);
 
         // Crear el perfil de paciente asociado al usuario
-        $user->paciente()->create([
+        $paciente = $user->paciente()->create([
             'fechaRegistro' => now(),
             'tipoDiabetes' => $request->tipoDiabetes,
             'sexo' => $request->sexo,
             'fecha_nacimiento' => $request->fecha_nacimiento,
         ]);
+
+        // Crear historial médico vacío para el paciente
+        $paciente->historialMedico()->create(); 
 
         event(new Registered($user));
 

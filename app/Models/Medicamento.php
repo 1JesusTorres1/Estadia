@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Medicamento extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'idmedicamentos';
 
     
     protected $fillable = [
@@ -18,8 +17,4 @@ class Medicamento extends Model
         'viaAdministracion',
     ];
 
-    public function getRouteKeyName()
-    {
-        return 'idmedicamentos';
-    }
 }

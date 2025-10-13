@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-between items-center mb-4">
                 <button onclick="window.history.back()" class="inline-flex items-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150">
                     <svg class="w-4 h-4 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
@@ -82,6 +82,19 @@
                                                 Eliminar
                                             </button>
                                         </form>
+                                        @if($user->rol == 'paciente')
+                                            <a href="{{ route('doctor.pacientes.historialMedico', $user) }}" class="bg-yellow-500 text-white px-3 py-1 rounded-md text-sm font-medium hover:bg-yellow-600 transition">
+                                                Historial Médico
+                                            </a>
+
+                                            <a href="{{ route('doctor.pacientes.mediciones', $user) }}" class="bg-yellow-500 text-white px-3 py-1 rounded-md text-sm font-medium hover:bg-yellow-600 transition">
+                                                Mediciones
+                                            </a>
+
+                                            <a href="{{ route('doctor.pacientes.prescripcion.ver', $user) }}" class="bg-yellow-500 text-white px-3 py-1 rounded-md text-sm font-medium hover:bg-yellow-600 transition">
+                                                Recetar medicamento
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

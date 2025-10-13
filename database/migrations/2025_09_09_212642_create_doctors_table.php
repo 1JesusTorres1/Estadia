@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('idDoctor');
             $table->foreignId('user_id')
                   ->nullable()
-                  ->constrained('users') // Se enlaza a la tabla 'users'
+                  ->constrained('users') 
                   ->onUpdate('cascade')
                   ->onDelete('set null');
             $table->string('especialidad', 45);

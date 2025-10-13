@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Paciente extends Model
 {
@@ -23,8 +25,32 @@ class Paciente extends Model
         'fecha_nacimiento' => 'date',
     ];
 
+    
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function historialMedico(): HasOne
+    {
+        return $this->hasOne(HistorialMedico::class, 'patient_id');
+    }
+
+    public function mediciones(): HasMany
+    {
+        return $this->hasMany(Medicion::class, 'patient_id');
+    }
+
+    public function seguimientosMedicos(): HasMany
+    {
+        return $this->hasMany(SeguimientoMedico::class, 'patient_id');
+    }
+
+    public function prescripciones(): HasMany 
+    {
+        return $this->hasMany(Prescripcion::class, 'paciente_id'); 
+    }
+
+
 }

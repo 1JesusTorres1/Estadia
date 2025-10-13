@@ -29,7 +29,7 @@
                         <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                             @foreach ($medicamentos as $medicamento)
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{{ $medicamento->idmedicamentos }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{{ $medicamento->id }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">{{ $medicamento->nombre }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">{{ $medicamento->descripcion }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">{{ $medicamento->stock }}</td>
@@ -40,7 +40,7 @@
                                         Editar
                                     </a>
 
-                                    <form action="{{ route('admin.medicamentos.destroy', $medicamento->idmedicamentos) }}" method="POST" onsubmit="return confirm('¿Eliminar medicamento?');">
+                                    <form action="{{ route('admin.medicamentos.destroy', $medicamento) }}" method="POST" onsubmit="return confirm('¿Eliminar medicamento?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded-md text-sm font-medium hover:bg-red-700 transition">
