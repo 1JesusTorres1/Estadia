@@ -5,7 +5,10 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\Admin\MedicamentoController;
+use App\Http\Controllers\EstudiosMedicosController;
+use App\Http\Controllers\CitaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,6 +56,7 @@ Route::middleware(['auth', 'verified', 'role:paciente'])->prefix('paciente')->na
     Route::get('/historialMedico', [PacienteController::class, 'miHistorial'])->name('historialMedico');
     Route::get('/mediciones', [PacienteController::class, 'misMediciones'])->name('mediciones');
     Route::get('/prescripciones', [PacienteController::class, 'misPrescripciones'])->name('prescripciones');
+    Route::resource('/citas', CitaController::class)->names('citas');
 });
 
 // --- RUTAS PARA DOCTORES (Y TAMBIÉN ACCESIBLES POR ADMINS) ---
@@ -78,6 +82,12 @@ Route::middleware(['auth', 'verified', 'role:doctor,admin'])->prefix('doctor')->
 
     // RUTA POST para procesar el formulario
     Route::post('/pacientes/{user}/prescripcion', [PacienteController::class, 'CreatePrescripcion'])->name('pacientes.prescripcion.agregar');
+
+    // RUTA PARA ACCEDER A LOS HORARIOS DEL DOCTOR
+    Route::resource('/horarios', HorarioController::class)->names('horarios');
+
+    // Para agregar un estudio
+    Route::post('/pacientes/{user}/estudios', [PacienteController::class, 'CreateEstudio'])->name('pacientes.estudios.agregar');
 });
 
 // --- RUTAS EXCLUSIVAS PARA ADMINS ---

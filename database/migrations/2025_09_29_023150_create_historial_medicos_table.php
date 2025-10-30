@@ -26,6 +26,7 @@ return new class extends Migration
 
                 $table->text('antecedentesFamiliares')->nullable();
                 $table->text('alergias')->nullable();
+                $table->text('medicamentos')->nullable();
                 $table->text('enfermedades')->nullable();
                 $table->text('notasMedicas')->nullable();
                 

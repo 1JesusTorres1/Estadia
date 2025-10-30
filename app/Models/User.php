@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Doctor::class, 'user_id');
     }
+
+    public function citasAgendadas()
+    {
+        return $this->hasMany(Cita::class, 'doctor_id');
+    }
 }

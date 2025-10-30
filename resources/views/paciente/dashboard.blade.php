@@ -60,7 +60,7 @@
                     </a><br>
 
                     <!-- Citas Médicas -->
-                    <a href="#" 
+                    <a href="{{ route('paciente.citas.index') }}" 
                        class="group bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex items-center space-x-4 hover:shadow-xl hover:scale-105 transition-transform duration-200">
                         <div class="bg-sky-100 dark:bg-sky-900 p-3 rounded-full">
                             <!-- Icono SVG -->
@@ -104,7 +104,7 @@
                            <svg class="w-6 h-6 text-rose-600 dark:text-rose-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.41,12.92,12,21.33,3.59,12.92a7,7,0,0,1,9.9-9.9l.51.5.51-.5a7,7,0,0,1,9.9,9.9Z"/></svg>
                         </div>
                         <div>
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-rose-600 dark:group-hover:text-rose-400">Mis Mediciones</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-rose-600 dark:group-hover:text-rose-400">Seguimiento y Mediciones</h3>
                             <p class="text-sm text-gray-600 dark:text-gray-400">Consulta tus mediciones de glucosa, presión, altura, etc.</p>
                         </div>
                     </a>

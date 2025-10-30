@@ -30,7 +30,7 @@
 
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-center">
                                         <a href="{{ route('doctor.pacientes.mediciones', $user) }}" class="bg-yellow-500 text-white px-3 py-1 rounded-md text-sm font-medium hover:bg-yellow-600 transition">
-                                            Mediciones
+                                            Seguimiento y Mediciones
                                         </a>
                                     </td>
 
@@ -39,6 +39,7 @@
                                             Recetar medicamento
                                         </a>
                                     </td>
+
                                 </tr>
                             @empty
                                 <tr>

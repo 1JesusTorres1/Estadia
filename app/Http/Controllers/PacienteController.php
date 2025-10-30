@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Medicamento;
 use App\Models\Prescripcion;
+use App\Models\EstudiosMedicos;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -77,7 +78,7 @@ class PacienteController extends Controller
 
     public function verMediciones(User $user): View
     {
-        $user->load(['paciente.mediciones']); 
+        $user->load(['paciente.mediciones', 'paciente.estudiosMedicos']);
 
         return view('doctor.pacientes.mediciones', [
             'user' => $user,
@@ -153,13 +154,39 @@ class PacienteController extends Controller
     }
 
     public function misPrescripciones(): View
-{
-    $user = Auth::user();
+    {
+        $user = Auth::user();
 
-    $user->load(['paciente.prescripciones.medicamento', 'paciente.prescripciones.doctor']);
+        $user->load(['paciente.prescripciones.medicamento', 'paciente.prescripciones.doctor']);
 
-    return view('paciente.prescripciones', [
-        'user' => $user,
-    ]);
-}
+        return view('paciente.prescripciones', [
+            'user' => $user,
+        ]);
+    }
+
+    public function CreateEstudio(Request $request, User $user): RedirectResponse
+    {
+        $validated = $request->validate([
+            'tipo_estudio' => 'required|string|max:255',
+            'fecha_estudio' => 'required|date',
+            'resultado' => 'nullable|string',
+            'estatus' => 'required|in:pendiente,en revisión,completado', 
+            'observaciones_doctor' => 'nullable|string',
+            'descripcion' => 'nullable|string', 
+        ]);
+        
+        if ($user->paciente) {
+            $estudio = $user->paciente->estudiosMedicos()->create([
+                'tipo_estudio' => $validated['tipo_estudio'], 
+                'fecha_estudio' => $validated['fecha_estudio'], 
+                'resultado' => $validated['resultado'],
+                'estatus' => $validated['estatus'],
+                'observaciones_doctor' => $validated['observaciones_doctor'],
+                'descripcion' => $validated['descripcion'],
+                'doctor_id' => Auth::id(),
+            ]);
+        }
+
+        return redirect()->route('doctor.pacientes.mediciones', $user)->with('status', 'Estudio agregado');
+    }
 }

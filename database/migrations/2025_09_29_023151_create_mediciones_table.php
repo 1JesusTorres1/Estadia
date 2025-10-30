@@ -23,6 +23,10 @@ return new class extends Migration
             $table->float('glucosa')->nullable();
             $table->float('presionSistolica')->nullable();
             $table->float('presionDiastolica')->nullable();
+            $table->float('hemoglobina')->nullable();
+            $table->float('fatiga')->nullable();
+            $table->text('visionBorrosa')->nullable();
+            $table->text('hormigueo')->nullable();
             $table->float('peso')->nullable();
             $table->float('altura')->nullable();
             $table->text('notas')->nullable();
