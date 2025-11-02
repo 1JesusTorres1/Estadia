@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Instalar dependencias del sistema
+# Instalar dependencias del sistema y Node.js
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     zip \
     curl \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
 # Instalar extensiones de PHP

@@ -14,6 +14,15 @@ echo "MySQL está listo!"
 echo "Instalando/actualizando dependencias de Composer..."
 composer install --no-interaction --optimize-autoloader
 
+# Instalar dependencias de NPM si existen
+if [ -f "package.json" ]; then
+    echo "Instalando dependencias de NPM..."
+    npm install
+    
+    echo "Compilando assets con Vite..."
+    npm run build
+fi
+
 # Dar permisos a las carpetas necesarias
 echo "Configurando permisos..."
 chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache 2>/dev/null || true
